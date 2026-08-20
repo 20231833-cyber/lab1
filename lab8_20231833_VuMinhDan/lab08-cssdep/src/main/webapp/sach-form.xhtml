@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                template="/template.xhtml">
+    <ui:define name="title">Bài 6 - Form Sách</ui:define>
+    <ui:define name="content">
+        <h2>Bài 6 - Form Sách bằng JSF</h2>
+        <h:messages globalOnly="true" styleClass="success"/>
+        <h:form>
+            <p>
+                <h:outputLabel for="tenSach" value="Tên sách: "/>
+                <h:inputText id="tenSach" value="#{sachBean.sach.tenSach}"
+                             required="true" requiredMessage="Tên sách không được để trống"/>
+                <h:message for="tenSach" styleClass="error"/>
+            </p>
+            <p>
+                <h:outputLabel for="tacGia" value="Tác giả: "/>
+                <h:inputText id="tacGia" value="#{sachBean.sach.tacGia}"
+                             required="true" requiredMessage="Tác giả không được để trống"/>
+                <h:message for="tacGia" styleClass="error"/>
+            </p>
+            <p>
+                <h:outputLabel for="nam" value="Năm xuất bản: "/>
+                <h:inputText id="nam" value="#{sachBean.sach.namXuatBan}"/>
+                <h:message for="nam" styleClass="error"/>
+            </p>
+            <h:commandButton value="Lưu sách" action="#{sachBean.save}"/>
+        </h:form>
+        <p><h:link outcome="sach-list" value="Xem danh sách sách"/></p>
+    </ui:define>
+</ui:composition>

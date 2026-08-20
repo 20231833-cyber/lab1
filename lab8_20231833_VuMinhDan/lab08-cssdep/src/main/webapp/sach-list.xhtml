@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core"
+                template="/template.xhtml">
+    <ui:define name="title">Bài 6 - Danh sách sách</ui:define>
+    <ui:define name="content">
+        <h2>Danh sách sách</h2>
+        <h:messages globalOnly="true" styleClass="success"/>
+        <h:form>
+            <h:dataTable value="#{sachBean.dsSach}" var="s" border="1" cellpadding="8">
+                <h:column><f:facet name="header">ID</f:facet>#{s.id}</h:column>
+                <h:column><f:facet name="header">Tên sách</f:facet>#{s.tenSach}</h:column>
+                <h:column><f:facet name="header">Tác giả</f:facet>#{s.tacGia}</h:column>
+                <h:column><f:facet name="header">Năm xuất bản</f:facet>#{s.namXuatBan}</h:column>
+                <h:column>
+                    <f:facet name="header">Thao tác</f:facet>
+                    <h:commandButton value="Xóa" action="#{sachBean.delete(s.id)}"
+                                     onclick="return confirm('Bạn có chắc muốn xóa sách này?');"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <p><h:link outcome="sach-form" value="Thêm sách mới"/></p>
+    </ui:define>
+</ui:composition>

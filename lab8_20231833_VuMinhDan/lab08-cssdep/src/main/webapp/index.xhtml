@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                template="/template.xhtml">
+    <ui:define name="title">Lab 8 - Trang chủ</ui:define>
+    <ui:define name="content">
+        <h1>Lab 8 - Jakarta Faces / JSF</h1>
+        <p>Chuyển form sang JSF, validation, message và các bài mở rộng.</p>
+        <h3>Các bài thực hành</h3>
+        <ol>
+            <li><h:link outcome="sinhvien-list" value="Bài 1-5: Quản lý sinh viên JSF"/></li>
+            <li><h:link outcome="sach-form" value="Bài 6: Form Sách"/> - <h:link outcome="sach-list" value="Danh sách sách"/></li>
+            <li><h:link outcome="product-form" value="Bài 7: Chuyển form Sản phẩm sang JSF"/></li>
+            <li><h:link outcome="login" value="Bài 8: Tạo form đăng nhập JSF"/></li>
+            <li><h:link outcome="sinhvien-list" value="Bài 9: Sửa sinh viên"/></li>
+            <li><h:link outcome="sinhvien-list" value="Bài 10: Tìm kiếm sinh viên"/></li>
+            <li> Bài 11: Layout dùng chung - header/menu/footer</li>
+            <li> Bài 12: Sử dụng selectOneMenu trong form sinh viên</li>
+            <li> Bài 13: Báo cáo so sánh Servlet/JSP và JSF</li>
+        </ol>
+        <h:panelGroup>
+            <h:link outcome="sinhvien-list" value="Mở danh sách sinh viên"/> &#160;|&#160;
+            <h:link outcome="login" value="Mở trang đăng nhập"/>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>

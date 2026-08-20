@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Thông tin sinh viên</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc, #eef2ff);
+            color: #1e293b;
+        }
+        .page {
+            width: min(1060px, calc(100% - 30px));
+            margin: 28px auto;
+        }
+        .student-card {
+            background: rgba(255,255,255,.98);
+            border: 1px solid #dbe4f0;
+            border-radius: 22px;
+            padding: 38px 40px 30px;
+            box-shadow: 0 18px 50px rgba(30,41,59,.10);
+        }
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 30px;
+        }
+        .icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+            border: 1px solid #bfdbfe;
+        }
+        .title-row h1 {
+            margin: 0 0 5px;
+            font-size: 30px;
+            color: #172554;
+        }
+        .subtitle {
+            margin: 0;
+            color: #64748b;
+            font-size: 16px;
+        }
+        .field-full { margin-bottom: 26px; }
+        .field-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        .field label {
+            display: block;
+            margin-bottom: 9px;
+            color: #1e3a5f;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .field input,
+        .field select {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            background: #fff;
+            color: #1e293b;
+            font-size: 15px;
+            transition: .2s ease;
+        }
+        .field input:focus,
+        .field select:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 4px rgba(79,70,229,.10);
+        }
+        .error {
+            display: block;
+            margin-top: 7px;
+            color: #dc2626;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .messages {
+            margin-bottom: 15px;
+            color: #166534;
+            font-weight: 600;
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 25px;
+            margin-top: 30px;
+        }
+        .save-btn {
+            height: 52px;
+            padding: 0 25px;
+            border: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #4f46e5, #4338ca);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(79,70,229,.22);
+            transition: .2s ease;
+        }
+        .save-btn:hover { transform: translateY(-1px); box-shadow: 0 11px 24px rgba(79,70,229,.28); }
+        .cancel-btn {
+            height: 52px;
+            padding: 0 22px;
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #dbe4f0;
+            border-radius: 12px;
+            background: #f8fafc;
+            color: #475569;
+            text-decoration: none;
+            font-weight: 650;
+        }
+        .cancel-btn:hover { background: #eef2ff; color: #3730a3; }
+        .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #4338ca;
+            text-decoration: none;
+            font-weight: 650;
+        }
+        .home-link:hover { text-decoration: underline; }
+        @media (max-width: 700px) {
+            .page { width: min(100% - 18px, 1060px); margin: 10px auto; }
+            .student-card { padding: 25px 20px; border-radius: 17px; }
+            .title-row h1 { font-size: 24px; }
+            .icon { width: 58px; height: 58px; font-size: 28px; }
+            .field-grid { grid-template-columns: 1fr; gap: 0; }
+            .field { margin-bottom: 24px; }
+            .actions { flex-wrap: wrap; }
+        }
+    </style>
+</h:head>
+<h:body>
+<div class="page">
+    <div class="student-card">
+        <div class="title-row">
+            <div class="icon">👨‍🎓</div>
+            <div>
+                <h1>Thông tin sinh viên</h1>
+                <p class="subtitle">Nhập thông tin sinh viên cần quản lý</p>
+            </div>
+        </div>
+
+        <h:messages globalOnly="true" styleClass="messages"/>
+
+        <h:form>
+            <h:inputHidden value="#{sinhVienBean.sinhVien.id}"/>
+
+            <div class="field field-full">
+                <label for="ma">Mã sinh viên</label>
+                <h:inputText id="ma" value="#{sinhVienBean.sinhVien.maSinhVien}"
+                             required="true" requiredMessage="Mã sinh viên bắt buộc nhập"/>
+                <h:message for="ma" styleClass="error"/>
+            </div>
+
+            <div class="field field-full">
+                <label for="hoten">Họ và tên</label>
+                <h:inputText id="hoten" value="#{sinhVienBean.sinhVien.hoTen}"
+                             required="true" requiredMessage="Họ tên bắt buộc nhập"/>
+                <h:message for="hoten" styleClass="error"/>
+            </div>
+
+            <div class="field-grid">
+                <div class="field">
+                    <label for="email">Email</label>
+                    <h:inputText id="email" value="#{sinhVienBean.sinhVien.email}"/>
+                    <h:message for="email" styleClass="error"/>
+                </div>
+
+                <div class="field">
+                    <label for="lop">Lớp</label>
+                    <h:selectOneMenu id="lop" value="#{sinhVienBean.sinhVien.lop}">
+                        <f:selectItem itemValue="" itemLabel="-- Chọn lớp --" noSelectionOption="true"/>
+                        <f:selectItem itemValue="DCCNTT15.10.1" itemLabel="DCCNTT15.10.1"/>
+                        <f:selectItem itemValue="DCCNTT15.10.2" itemLabel="DCCNTT15.10.2"/>
+                        <f:selectItem itemValue="DCCNTT15.10.3" itemLabel="DCCNTT15.10.3"/>
+                    </h:selectOneMenu>
+                    <h:message for="lop" styleClass="error"/>
+                </div>
+            </div>
+
+            <div class="actions">
+                <h:commandButton value="💾  Lưu sinh viên" action="#{sinhVienBean.save}" styleClass="save-btn"/>
+                <h:button value="↩  Hủy" outcome="sinhvien-list" styleClass="cancel-btn"/>
+            </div>
+        </h:form>
+
+        <h:link outcome="index" value="← Về trang chủ" styleClass="home-link"/>
+    </div>
+</div>
+</h:body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+<h:head>
+    <title>Bài 8 - Đăng nhập JSF</title>
+    <style>
+        body { font-family: Arial; background:#f5f5f5; }
+        .login-box { width:360px; margin:90px auto; padding:25px; background:white; border:1px solid #ddd; }
+        .row { margin-bottom:15px; }
+        label { display:inline-block; width:100px; font-weight:bold; }
+        .error { color:red; font-weight:bold; }
+    </style>
+</h:head>
+<h:body>
+    <div class="login-box">
+        <h2>Bài 8 - Đăng nhập JSF</h2>
+        <p>Tài khoản mẫu: <b>admin</b> / <b>123456</b></p>
+        <h:messages styleClass="error"/>
+        <h:form>
+            <div class="row">
+                <label>Tài khoản:</label>
+                <h:inputText id="username" value="#{loginBean.username}" required="true"
+                             requiredMessage="Vui lòng nhập tài khoản"/>
+            </div>
+            <div class="row">
+                <label>Mật khẩu:</label>
+                <h:inputSecret id="password" value="#{loginBean.password}" required="true"
+                               requiredMessage="Vui lòng nhập mật khẩu"/>
+            </div>
+            <h:commandButton value="Đăng nhập" action="#{loginBean.login}"/>
+        </h:form>
+        <p><h:link outcome="index" value="Về trang chủ"/></p>
+    </div>
+</h:body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets">
+<ui:composition template="/template.xhtml">
+    <ui:define name="title">Bài 7 - Thêm sản phẩm</ui:define>
+
+    <ui:define name="content">
+        <div class="product-card">
+            <div class="product-heading">
+                <div class="product-icon">🛒</div>
+                <div>
+                    <h1>Thông tin sản phẩm</h1>
+                    <p>Nhập thông tin sản phẩm cần quản lý</p>
+                </div>
+            </div>
+
+            <h:form styleClass="product-form">
+                <h:messages globalOnly="true" styleClass="success"/>
+
+                <div class="product-field full-field">
+                    <h:outputLabel for="ten" value="Tên sản phẩm"/>
+                    <h:inputText id="ten" value="#{productBean.product.ten}"
+                                 required="true"
+                                 requiredMessage="Tên sản phẩm không được để trống"/>
+                    <h:message for="ten" styleClass="error"/>
+                </div>
+
+                <div class="product-grid">
+                    <div class="product-field">
+                        <h:outputLabel for="gia" value="Giá sản phẩm"/>
+                        <div class="input-suffix">
+                            <h:inputText id="gia" value="#{productBean.product.gia}"
+                                         required="true"
+                                         requiredMessage="Giá không được để trống"/>
+                            <span>VNĐ</span>
+                        </div>
+                        <h:message for="gia" styleClass="error"/>
+                    </div>
+
+                    <div class="product-field">
+                        <h:outputLabel for="soLuong" value="Số lượng"/>
+                        <h:inputText id="soLuong" value="#{productBean.product.soLuong}"
+                                     required="true"
+                                     requiredMessage="Số lượng không được để trống"/>
+                        <h:message for="soLuong" styleClass="error"/>
+                    </div>
+                </div>
+
+                <div class="product-actions">
+                    <h:commandButton value="💾  Lưu sản phẩm"
+                                     action="#{productBean.save}"
+                                     styleClass="btn-primary"/>
+                    <h:link outcome="product-form" value="↻  Làm mới" styleClass="btn-light"/>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

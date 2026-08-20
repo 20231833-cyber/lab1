@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+<h:head>
+    <title>Danh sách sinh viên JSF</title>
+    <style>
+        body { font-family:Arial; margin:30px; }
+        table { border-collapse:collapse; width:90%; margin-top:10px; }
+        th,td { border:1px solid #ccc; padding:8px; text-align:left; }
+        th { background:#eee; }
+        .success { color:green; font-weight:bold; }
+        .top { margin-bottom:15px; }
+    </style>
+</h:head>
+<h:body>
+    <h2>Danh sách sinh viên (JSF)</h2>
+    <h:messages globalOnly="true" styleClass="success"/>
+
+    <h:form styleClass="top">
+        <h:inputText value="#{sinhVienBean.keyword}" placeholder="Nhập tên hoặc lớp..."/>
+        <h:commandButton value="Tìm kiếm" action="#{sinhVienBean.search}" style="margin-left:5px"/>
+        <h:commandButton value="Xóa tìm kiếm" action="#{sinhVienBean.clearSearch}" style="margin-left:5px"/>
+    </h:form>
+
+    <h:form>
+        <h:dataTable value="#{sinhVienBean.dsSinhVien}" var="sv">
+            <h:column><f:facet name="header">ID</f:facet>#{sv.id}</h:column>
+            <h:column><f:facet name="header">Mã SV</f:facet>#{sv.maSinhVien}</h:column>
+            <h:column><f:facet name="header">Họ tên</f:facet>#{sv.hoTen}</h:column>
+            <h:column><f:facet name="header">Email</f:facet>#{sv.email}</h:column>
+            <h:column><f:facet name="header">Lớp</f:facet>#{sv.lop}</h:column>
+            <h:column>
+                <f:facet name="header">Thao tác</f:facet>
+                <h:commandLink value="Sửa" action="#{sinhVienBean.edit(sv)}"/>
+                <h:outputText value=" | "/>
+                <h:commandLink value="Xóa" action="#{sinhVienBean.delete(sv.id)}"
+                               onclick="return confirm('Chắc chắn xóa?');"/>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+
+    <br/>
+    <h:button value="Thêm sinh viên mới" outcome="sinhvien-form"/>
+    <p><h:link outcome="index" value="Về trang chủ"/></p>
+</h:body>
+</html>

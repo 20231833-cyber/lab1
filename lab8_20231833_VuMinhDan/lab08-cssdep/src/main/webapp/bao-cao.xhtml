@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html"
+                template="/template.xhtml">
+    <ui:define name="title">Bài 13 - Báo cáo</ui:define>
+    <ui:define name="content">
+        <h2>Bài 13 - So sánh Servlet/JSP và JSF</h2>
+        <table border="1" cellpadding="8">
+            <tr><th>Nội dung</th><th>Servlet + JSP</th><th>JSF</th></tr>
+            <tr><td>Giao diện</td><td>JSP + HTML/JSTL</td><td>XHTML + JSF component</td></tr>
+            <tr><td>Xử lý form</td><td>Servlet nhận request</td><td>Managed Bean/CDI Bean</td></tr>
+            <tr><td>Nhận dữ liệu</td><td>request.getParameter()</td><td>#{bean.property}</td></tr>
+            <tr><td>Validation</td><td>Thường tự kiểm tra</td><td>required + Bean Validation</td></tr>
+            <tr><td>Message</td><td>Tự truyền sang JSP</td><td>FacesMessage + h:message/h:messages</td></tr>
+            <tr><td>Bảng</td><td>JSTL c:forEach</td><td>h:dataTable</td></tr>
+            <tr><td>Điều hướng</td><td>forward/sendRedirect</td><td>outcome/faces-redirect</td></tr>
+        </table>
+        <h3>Luồng Servlet/JSP</h3>
+        <p>JSP Form → HTTP Request → Servlet → getParameter() → Repository → JSP</p>
+        <h3>Luồng JSF</h3>
+        <p>XHTML → FacesServlet → JSF Lifecycle → Validation → Bean → Repository → FacesMessage → XHTML</p>
+    </ui:define>
+</ui:composition>
